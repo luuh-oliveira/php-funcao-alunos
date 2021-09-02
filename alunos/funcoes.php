@@ -4,11 +4,23 @@ function classificarAluno(array &$turma)
 {
     foreach ($turma as $chave => $aluno) {
         if ($aluno["nota"] >= 50) {
-            $turma[$chave]["situação"] = "Aprovado";
+            $turma[$chave]["situacao"] = "Aprovado";
         } else {
-            $turma[$chave]["situação"] = "Reprovado";
+            $turma[$chave]["situacao"] = "Reprovado";
         }
     }
 }
+
+function alterarNota(array &$turma, $nome, $novaNota){
+
+    foreach ($turma as $chave => $aluno) {
+        if ($aluno["nome"] == $nome) {
+            $turma[$chave]["nota"] = $novaNota;
+            return;
+        }
+    }
+}
+
+
 
 ?>

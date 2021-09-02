@@ -34,6 +34,11 @@ table{
     border-collapse: collapse;
 }
 
+table tr:hover{
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+
 table td, th{
     border: 1px solid black;
     padding: 10px;
@@ -45,4 +50,20 @@ table td, th{
 
 .reprovado{
     background-color: rgba(233, 20, 20, 0.74);
+}
+
+.containerFormNota{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(245, 245, 245, 0.37);
+}
+
+.containerFormNota form{
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
 }

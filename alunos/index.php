@@ -6,6 +6,17 @@ require("./funcoes.php");
 classificarAluno($alunos);
 
 
+
+if (isset($_GET["novaNota"])) {
+    $nome = $_GET["nomeAluno"];
+    $nota = $_GET["novaNota"];
+
+    alterarNota($alunos, $nome, $nota);
+    classificarAluno($alunos);
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +26,7 @@ classificarAluno($alunos);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
     <title>Notas dos alunos</title>
 </head>
 
@@ -31,17 +43,18 @@ classificarAluno($alunos);
 
             <?php
             foreach ($alunos as $aluno) {
-                if ($aluno["nota"] >= 50) {
-                    $class = "aprovado";
-                } else {
-                    $class = "reprovado";
-                }
             ?>
-                <tr class="<?$class?>">
-                <th> <?=$aluno["nome"]?> </th>
-                <th> <?=$aluno["idade"]?> </th>
-                <th> <?=$aluno["nota"]?> </th>
-                <th> <?=$aluno["situação"]?> </th>
+                <tr onclick="showFormNota('<?=$aluno['nome'] ?>')"> 
+                    <td> <?= $aluno["nome"] ?> </td>
+                    <td> <?= $aluno["idade"] ?> </td>
+                    <td> <?= $aluno["nota"] ?> </td>
+                    <td class="<?= strtolower($aluno["situacao"]) ?>"> 
+                        <?=isset($aluno["situacao"]) ?
+                            $aluno["situacao"] :
+                            ""
+                        ?>
+                    </td>
+                   
                 </tr>
             <?php
             }
@@ -51,6 +64,14 @@ classificarAluno($alunos);
         </table>
 
     </section>
+
+    <div class="containerFormNota">
+        <form method="GET" action="">
+            <input type="number" name="novaNota" placeholder="Digite a nova nota">
+            <input type="hidden" id="nomeAluno" name="nomeAluno">
+            <button>Alterar</button>
+        </form>
+    </div>
 
 </body>
 
